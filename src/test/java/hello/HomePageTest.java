@@ -34,15 +34,7 @@ public class HomePageTest {
 
     @Test
     public void getHomePage_BootstrapLoaded() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.TEXT_HTML))
-                .andExpect(status().isOk())
-                .andExpect(xpath(BootstrapLiterals.bootstrapCSSXpath).exists());
-        for (String s: BootstrapLiterals.bootstrapJSurls) {
-            String jsXPath = String.format("//script[@src='%s']",s);
-            mvc.perform(MockMvcRequestBuilders.get("/greeting").accept(MediaType.TEXT_HTML))
-              .andExpect(status().isOk())
-              .andExpect(xpath(jsXPath).exists());
-        }
+       BootstrapTestHelper.bootstrapIsLoaded(mvc,"/");
     }
 
 
